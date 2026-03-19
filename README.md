@@ -39,7 +39,6 @@ Each tool follows the same pattern. No manual coding required:
 3. Claude builds it, iterates, and updates files directly on my computer via filesystem access
 4. I narrate what I observe in real time. Claude classifies, logs, and flags.
 
-The prompts that built each tool are included unedited. Typos and all.
 
 **To run any tool locally:**
 ```bash
