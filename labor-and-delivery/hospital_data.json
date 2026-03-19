@@ -1,0 +1,57 @@
+{
+  "entries": [],
+  "labs": [],
+  "ld_watchlist": [
+    {
+      "category": "Room & facility",
+      "items": [
+        "Labor & delivery room fee (hourly or flat)",
+        "Recovery room fee",
+        "Mother/baby room (postpartum)",
+        "Nursery or NICU if applicable"
+      ]
+    },
+    {
+      "category": "Delivery charges",
+      "items": [
+        "Vaginal delivery fee OR C-section fee (not both — common billing error)",
+        "OB physician fee (usually billed separately by the doctor)",
+        "Anesthesiologist fee (if epidural — also usually separate)"
+      ]
+    },
+    {
+      "category": "Medications to watch",
+      "items": [
+        "Pitocin (oxytocin) — each bag billed separately. Note the bag size.",
+        "Penicillin — each dose billed separately regardless of size",
+        "Epidural medication if administered",
+        "Saline IV bags — verify count matches what you observed",
+        "Any pain medication administered"
+      ]
+    },
+    {
+      "category": "Common L&D billing errors",
+      "items": [
+        "Billed for both vaginal and C-section delivery",
+        "Duplicate charges for same medication or supply",
+        "Nursery fees for baby rooming-in with mother",
+        "Excessive saline bag charges",
+        "Epidural billed as both supply and procedure",
+        "Newborn billed for mother's tests",
+        "Circumcision charged without consent or performed"
+      ]
+    },
+    {
+      "category": "Baby charges (separate bill)",
+      "items": [
+        "Newborn assessment / pediatric exam",
+        "Hepatitis B vaccine",
+        "Vitamin K injection",
+        "Erythromycin eye ointment",
+        "Newborn hearing screening",
+        "PKU / metabolic screening (heel stick)",
+        "Bilirubin test if jaundice suspected"
+      ]
+    }
+  ]
+}

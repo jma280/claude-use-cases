@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hospital Scan Tracker — L&D</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f0; color: #1a1a1a; padding: 1.5rem; max-width: 700px; margin: 0 auto; }
+  h1 { font-size: 20px; font-weight: 500; margin-bottom: 0.25rem; }
+  .subtitle { font-size: 13px; color: #666; margin-bottom: 0.5rem; }
+  .reload-note { font-size: 12px; color: #b45309; background: #fffbeb; border: 0.5px solid #fcd34d; border-radius: 6px; padding: 6px 10px; margin-bottom: 1.25rem; }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 1.5rem; }
+  .stat { background: #fff; border: 0.5px solid #ddd; border-radius: 10px; padding: 0.75rem 1rem; }
+  .stat-label { font-size: 12px; color: #888; margin-bottom: 4px; }
+  .stat-value { font-size: 24px; font-weight: 500; }
+  .tabs { display: flex; gap: 0; margin-bottom: 1.5rem; border-bottom: 0.5px solid #ddd; }
+  .tab { padding: 8px 16px; font-size: 14px; cursor: pointer; border: none; background: none; color: #888; font-family: inherit; border-bottom: 2px solid transparent; margin-bottom: -0.5px; }
+  .tab.active { color: #1a1a1a; border-bottom-color: #1a1a1a; font-weight: 500; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+  .day-group { margin-bottom: 1.5rem; }
+  .day-header { font-size: 13px; font-weight: 500; color: #888; text-transform: uppercase; letter-spacing: 0.04em; padding: 0.5rem 0; border-bottom: 0.5px solid #ddd; margin-bottom: 8px; display: flex; justify-content: space-between; }
+  .log { display: flex; flex-direction: column; gap: 8px; }
+  .entry { background: #fff; border: 0.5px solid #ddd; border-radius: 10px; padding: 0.75rem 1rem; display: flex; align-items: flex-start; gap: 12px; }
+  .badge { font-size: 11px; font-weight: 500; padding: 3px 8px; border-radius: 6px; white-space: nowrap; flex-shrink: 0; margin-top: 2px; }
+  .badge-medication { background: #dbeafe; color: #1e40af; }
+  .badge-supply { background: #dcfce7; color: #166634; }
+  .badge-unknown { background: #f3f4f6; color: #374151; }
+  .entry-main { flex: 1; min-width: 0; }
+  .entry-name { font-size: 14px; font-weight: 500; }
+  .entry-auto { font-size: 12px; color: #666; margin-top: 2px; }
+  .entry-user-note { font-size: 12px; color: #444; margin-top: 4px; background: #f9f9f6; border-left: 2px solid #ccc; padding: 4px 8px; border-radius: 0 4px 4px 0; }
+  .entry-time { font-size: 11px; color: #999; white-space: nowrap; flex-shrink: 0; }
+  .empty { font-size: 14px; color: #999; padding: 1rem 0; }
+  .dose-panel { background: #fff; border: 0.5px solid #fcd34d; border-radius: 10px; padding: 1rem 1.25rem; margin-bottom: 1.5rem; }
+  .dose-panel-title { font-size: 13px; font-weight: 500; color: #92400e; margin-bottom: 10px; display: flex; justify-content: space-between; }
+  .dose-table { width: 100%; font-size: 13px; border-collapse: collapse; }
+  .dose-table th { text-align: left; color: #888; font-weight: 400; padding: 4px 8px 4px 0; border-bottom: 0.5px solid #eee; }
+  .dose-table td { padding: 6px 8px 6px 0; border-bottom: 0.5px solid #f5f5f0; vertical-align: top; }
+  .dose-table tr:last-child td { border-bottom: none; }
+  .dose-tag { display: inline-block; font-size: 11px; padding: 2px 6px; border-radius: 4px; font-weight: 500; }
+  .dose-loading { background: #fee2e2; color: #991b1b; }
+  .dose-maintenance { background: #dbeafe; color: #1e40af; }
+  .dose-total-row { font-weight: 500; font-size: 13px; padding-top: 8px; display: flex; justify-content: space-between; margin-top: 8px; border-top: 0.5px solid #ddd; }
+  .lab-entry { background: #fff; border: 0.5px solid #ddd; border-radius: 10px; padding: 0.75rem 1rem; display: flex; align-items: flex-start; gap: 12px; }
+  .lab-status { font-size: 11px; font-weight: 500; padding: 3px 8px; border-radius: 6px; white-space: nowrap; flex-shrink: 0; margin-top: 2px; }
+  .status-ordered { background: #fef3c7; color: #92400e; }
+  .status-completed { background: #dcfce7; color: #166534; }
+  .lab-main { flex: 1; min-width: 0; }
+  .lab-name { font-size: 14px; font-weight: 500; }
+  .lab-detail { font-size: 12px; color: #666; margin-top: 2px; }
+  .lab-note { font-size: 12px; color: #444; margin-top: 4px; background: #fffbeb; border-left: 2px solid #f59e0b; padding: 4px 8px; border-radius: 0 4px 4px 0; }
+  .lab-time { font-size: 11px; color: #999; white-space: nowrap; flex-shrink: 0; }
+  .watch-intro { font-size: 13px; color: #666; line-height: 1.6; margin-bottom: 1.25rem; }
+  .watch-category { background: #fff; border: 0.5px solid #ddd; border-radius: 10px; padding: 1rem 1.25rem; margin-bottom: 10px; }
+  .watch-category-title { font-size: 13px; font-weight: 500; color: #1a1a1a; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 0.5px solid #eee; display: flex; align-items: center; gap: 8px; }
+  .watch-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .dot-red { background: #ef4444; } .dot-amber { background: #f59e0b; } .dot-blue { background: #3b82f6; } .dot-green { background: #22c55e; }
+  .watch-item { font-size: 13px; color: #444; padding: 5px 0; border-bottom: 0.5px solid #f5f5f0; line-height: 1.5; display: flex; gap: 8px; align-items: flex-start; }
+  .watch-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .watch-check { color: #ccc; flex-shrink: 0; margin-top: 1px; }
+  .error-badge { display: inline-block; font-size: 10px; font-weight: 500; background: #fee2e2; color: #991b1b; padding: 1px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle; }
+  .info-box { background: #fffbeb; border: 0.5px solid #fcd34d; border-radius: 8px; padding: 0.75rem 1rem; font-size: 13px; color: #78350f; margin-bottom: 1.25rem; line-height: 1.5; }
+  .export-row { display: flex; gap: 8px; justify-content: flex-end; margin-top: 1rem; flex-wrap: wrap; }
+  .btn { padding: 7px 14px; border: 0.5px solid #ccc; border-radius: 8px; background: #fff; font-size: 13px; cursor: pointer; font-family: inherit; }
+  .btn:hover { background: #f0f0f0; }
+  @media (max-width: 500px) { .stats { grid-template-columns: repeat(2, 1fr); } .stat-value { font-size: 20px; } }
+</style>
+</head>
+<body>
+<h1>Hospital Scan Tracker</h1>
+<p class="subtitle">Labor &amp; delivery. Updated by Claude — refresh after each update.</p>
+<div class="reload-note">Claude updates <code>hospital_data.json</code> directly. Refresh this page after Claude makes changes to see the latest entries.</div>
+<div class="stats">
+  <div class="stat"><div class="stat-label">Total scans</div><div class="stat-value" id="tot">—</div></div>
+  <div class="stat"><div class="stat-label">Medications</div><div class="stat-value" id="med-count">—</div></div>
+  <div class="stat"><div class="stat-label">Supplies</div><div class="stat-value" id="sup-count">—</div></div>
+  <div class="stat"><div class="stat-label">Labs ordered</div><div class="stat-value" id="lab-count">—</div></div>
+</div>
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('scans', this)">Scans</button>
+  <button class="tab" onclick="switchTab('labs', this)">Labs &amp; Orders</button>
+  <button class="tab" onclick="switchTab('ld', this)">L&amp;D Watch List</button>
+</div>
+<div class="tab-panel active" id="tab-scans">
+  <div id="dose-summary-container"></div>
+  <div id="log-container"><div class="empty">Loading…</div></div>
+  <div class="export-row"><button class="btn" onclick="exportCSV()">Export CSV</button><button class="btn" onclick="exportText()">Export text</button></div>
+</div>
+<div class="tab-panel" id="tab-labs">
+  <div class="info-box">Each lab test is billed separately. Common L&D labs: GBS culture, CBC, type &amp; screen, metabolic panel. Confirm every ordered test on your itemized bill.</div>
+  <div id="lab-log-container"><div class="empty">Loading…</div></div>
+</div>
+<div class="tab-panel" id="tab-ld">
+  <p class="watch-intro">L&amp;D bills are among the most error-prone hospital bills. Use this checklist when reviewing your itemized bill at discharge.</p>
+  <div id="ld-watchlist-container"><div class="empty">Loading…</div></div>
+</div>
+<script>
+let entries=[],labs=[],ldWatchlist=[];
+const trackedDrugs=['penicillin','vancomycin','morphine','fentanyl','insulin','heparin','dilaudid','hydromorphone','pitocin','oxytocin','epidural'];
+const dotColors={'Room & facility':'dot-blue','Delivery charges':'dot-red','Medications to watch':'dot-amber','Common L&D billing errors':'dot-red','Baby charges (separate bill)':'dot-green'};
+function getDrugName(text){const t=text.toLowerCase();for(const d of trackedDrugs){if(t.includes(d))return d;}return null;}
+function extractDose(text){const m=text.match(/(\d+\.?\d*)\s*(mg|mcg|ml|units?|iu)/i);return m?{amount:parseFloat(m[1]),unit:m[2].toLowerCase()}:null;}
+function todayStr(){return new Date().toISOString().slice(0,10);}
+function formatDate(dateStr){if(!dateStr||dateStr==='Unknown date')return'Unknown date';if(dateStr===todayStr())return'Today';const d=new Date(dateStr+'T00:00:00');return d.toLocaleDateString([],{weekday:'long',month:'long',day:'numeric'});}
+function switchTab(tab,btn){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));btn.classList.add('active');document.getElementById('tab-'+tab).classList.add('active');}
+function renderDoseSummary(){const container=document.getElementById('dose-summary-container');const drugDoses={};entries.forEach(e=>{const drug=getDrugName(e.text);if(!drug)return;const dose=extractDose(e.text);if(!drugDoses[drug])drugDoses[drug]=[];drugDoses[drug].push({dose,time:e.time,date:e.date});});if(!Object.keys(drugDoses).length){container.innerHTML='';return;}container.innerHTML=Object.entries(drugDoses).map(([drug,doses])=>{const total=doses.reduce((s,d)=>s+(d.dose?d.dose.amount:0),0);const unit=doses.find(d=>d.dose)?.dose?.unit||'mg';const maxDose=Math.max(...doses.map(d=>d.dose?d.dose.amount:0));const rows=doses.map((d,i)=>{const isLoading=d.dose&&d.dose.amount===maxDose&&maxDose>3;const tag=isLoading?`<span class="dose-tag dose-loading">Loading</span>`:`<span class="dose-tag dose-maintenance">Maintenance</span>`;return`<tr><td>${i+1}</td><td>${d.date||'—'} ${d.time||''}</td><td>${d.dose?d.dose.amount+d.dose.unit:'—'}</td><td>${tag}</td></tr>`;}).join('');return`<div class="dose-panel"><div class="dose-panel-title"><span>${drug.charAt(0).toUpperCase()+drug.slice(1)} dose tracker</span><span style="font-weight:400;">${doses.length} dose${doses.length>1?'s':''} logged</span></div><table class="dose-table"><thead><tr><th>#</th><th>When</th><th>Dose</th><th>Type</th></tr></thead><tbody>${rows}</tbody></table>${total>0?`<div class="dose-total-row"><span>Total administered</span><span>${total.toFixed(1)}${unit}</span></div>`:''}</div>`;}).join('');}
+function renderScans(){document.getElementById('tot').textContent=entries.length;document.getElementById('med-count').textContent=entries.filter(e=>e.type==='medication').length;document.getElementById('sup-count').textContent=entries.filter(e=>e.type==='supply').length;renderDoseSummary();const container=document.getElementById('log-container');if(!entries.length){container.innerHTML='<div class="empty">No scans logged yet.</div>';return;}const byDate={};[...entries].reverse().forEach(e=>{const d=e.date||'Unknown date';if(!byDate[d])byDate[d]=[];byDate[d].push(e);});container.innerHTML=Object.entries(byDate).map(([date,dayEntries])=>{const mc=dayEntries.filter(e=>e.type==='medication').length;const sc=dayEntries.filter(e=>e.type==='supply').length;const summary=[mc?`${mc} med${mc>1?'s':''}`:'' ,sc?`${sc} supply`:''].filter(Boolean).join(', ');return`<div class="day-group"><div class="day-header"><span>${formatDate(date)}</span><span>${dayEntries.length} scan${dayEntries.length>1?'s':''} — ${summary||'all unknown'}</span></div><div class="log">${dayEntries.map(e=>{const userNote=e.userNote?`<div class="entry-user-note">${e.userNote}</div>`:'';return`<div class="entry"><span class="badge badge-${e.type}">${e.type.charAt(0).toUpperCase()+e.type.slice(1)}</span><div class="entry-main"><div class="entry-name">${e.text}</div><div class="entry-auto">${e.note}</div>${userNote}</div><div class="entry-time">${e.time||''}</div></div>`;}).join('')}</div></div>`;}).join('');}
+function renderLabs(){document.getElementById('lab-count').textContent=labs.length;const container=document.getElementById('lab-log-container');if(!labs.length){container.innerHTML='<div class="empty">No lab orders logged yet.</div>';return;}const byDate={};[...labs].reverse().forEach(l=>{const d=l.date||'Unknown date';if(!byDate[d])byDate[d]=[];byDate[d].push(l);});container.innerHTML=Object.entries(byDate).map(([date,dayLabs])=>{const completed=dayLabs.filter(l=>l.status==='completed').length;return`<div class="day-group"><div class="day-header"><span>${formatDate(date)}</span><span>${dayLabs.length} order${dayLabs.length>1?'s':''} — ${completed} completed</span></div><div class="log">${dayLabs.map(l=>{const userNote=l.userNote?`<div class="lab-note">${l.userNote}</div>`:'';return`<div class="lab-entry"><span class="lab-status status-${l.status||'ordered'}">${l.status==='completed'?'Completed':'Ordered'}</span><div class="lab-main"><div class="lab-name">${l.text}</div><div class="lab-detail">${l.guess}</div>${userNote}</div><div class="lab-time">${l.time||''}</div></div>`;}).join('')}</div></div>`;}).join('');}
+function renderLDWatchlist(){const container=document.getElementById('ld-watchlist-container');if(!ldWatchlist.length){container.innerHTML='<div class="empty">No watch list loaded.</div>';return;}container.innerHTML=ldWatchlist.map(cat=>{const dot=dotColors[cat.category]||'dot-blue';const isErrors=cat.category.includes('error');const items=cat.items.map(item=>`<div class="watch-item"><span class="watch-check">○</span><span>${item}${isErrors?'<span class="error-badge">common error</span>':''}</span></div>`).join('');return`<div class="watch-category"><div class="watch-category-title"><span class="watch-dot ${dot}"></span>${cat.category}</div>${items}</div>`;}).join('');}
+function exportText(){const lines=['HOSPITAL SCAN LOG — LABOR & DELIVERY','Generated: '+new Date().toLocaleString(),'='.repeat(50),''];const byDate={};entries.forEach(e=>{const d=e.date||'Unknown';if(!byDate[d])byDate[d]=[];byDate[d].push(e);});Object.entries(byDate).forEach(([date,dayEntries])=>{lines.push(formatDate(date).toUpperCase());lines.push('-'.repeat(30));dayEntries.forEach((e,i)=>{lines.push(`  ${i+1}. [${e.time||'?'}] ${e.type.toUpperCase()} — ${e.text}`);lines.push(`     Note: ${e.note}`);if(e.userNote)lines.push(`     Observed: ${e.userNote}`);});lines.push('');});if(labs.length){lines.push('LAB ORDERS');lines.push('-'.repeat(30));labs.forEach((l,i)=>{lines.push(`  ${i+1}. [${l.date} ${l.time||'?'}] ${l.status.toUpperCase()} — ${l.text}`);if(l.userNote)lines.push(`     Note: ${l.userNote}`);});lines.push('');}lines.push('='.repeat(50));lines.push(`TOTALS: ${entries.length} scans | ${entries.filter(e=>e.type==='medication').length} meds | ${entries.filter(e=>e.type==='supply').length} supplies | ${labs.length} lab orders`);const blob=new Blob([lines.join('\n')],{type:'text/plain'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='hospital-ld-log.txt';a.click();}
+function exportCSV(){const rows=[['#','Date','Time','Type','Item','Dose','Note','Observed']];entries.forEach((e,i)=>{const dose=extractDose(e.text);rows.push([i+1,e.date||'',e.time||'',e.type,`"${e.text}"`,dose?dose.amount+dose.unit:'',`"${e.note}"`,`"${(e.userNote||'').replace(/"/g,"'")}"`]);});if(labs.length){rows.push([]);rows.push(['#','Date','Time','Status','Lab/Test','Description','Note']);labs.forEach((l,i)=>rows.push([i+1,l.date||'',l.time||'',l.status,`"${l.text}"`,`"${l.guess}"`,`"${(l.userNote||'').replace(/"/g,"'")}"`]));}const blob=new Blob([rows.map(r=>r.join(',')).join('\n')],{type:'text/csv'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='hospital-ld-log.csv';a.click();}
+fetch('hospital_data.json').then(r=>r.json()).then(data=>{entries=data.entries||[];labs=data.labs||[];ldWatchlist=data.ld_watchlist||[];renderScans();renderLabs();renderLDWatchlist();}).catch(()=>{document.getElementById('log-container').innerHTML='<div class="empty">Could not load hospital_data.json. Make sure both files are in the same folder and opened via a local server.</div>';});
+</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "patient": "",
+  "start_date": "",
+  "start_time": "",
+  "events": [],
+  "categories": {
+    "admission": { "label": "Admission", "color": "#6366f1" },
+    "contraction": { "label": "Contractions", "color": "#ec4899" },
+    "medication": { "label": "Medication", "color": "#3b82f6" },
+    "procedure": { "label": "Procedure", "color": "#f59e0b" },
+    "labs": { "label": "Labs", "color": "#8b5cf6" },
+    "vitals": { "label": "Vitals", "color": "#10b981" },
+    "delivery": { "label": "Delivery", "color": "#ef4444" },
+    "postpartum": { "label": "Postpartum", "color": "#14b8a6" },
+    "note": { "label": "Note", "color": "#6b7280" }
+  }
+}
