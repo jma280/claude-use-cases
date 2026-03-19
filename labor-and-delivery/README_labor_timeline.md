@@ -1,10 +1,10 @@
 # Labor Timeline
 
-**A Claude-updated real-time timeline of labor events — built during an active L&D admission.**
+**A Claude-updated real-time timeline of labor events. Built during an active L&D admission.**
 
 ## What it does
 
-Tracks the full chronological story of labor from first contraction to delivery and beyond. Every event — water breaking, dilation checks, medication changes, contraction progress — gets logged with a timestamp and category, color-coded on a visual timeline.
+Tracks the full chronological story of labor from first contraction to delivery and beyond. Every event from water breaking, dilation checks, medication changes, contraction progress gets logged with a timestamp and category, color-coded on a visual timeline.
 
 Useful during labor for situational awareness, and afterward as a complete record to cross-reference against your hospital bill.
 
@@ -22,7 +22,7 @@ Useful during labor for situational awareness, and afterward as a complete recor
 
 ## How it works
 
-Claude listens to your narration and writes events directly to `labor_timeline_data.json`. You refresh the browser to see updates.
+Claude listens to your narration (written or verbal) and writes events directly to `labor_timeline_data.json`. You refresh the browser to see updates.
 
 ```
 labor_timeline_data.json ← Claude writes here
@@ -86,21 +86,6 @@ labor_timeline.html      ← reads JSON, displays timeline in browser
 | `delivery` | Delivery | Birth event |
 | `postpartum` | Postpartum | Recovery, baby events |
 | `note` | Note | Anything else |
-
----
-
-## Example prompts used to populate this
-
-```
-"Labor started this morning at 9am and water broke at 9:15 on the toilet at home.
-We went to doctor's office to confirm, confirmed at 10:15 with 4cm dilation.
-Arrived at hospital at 10:45, contractions every 10 min.
-Got IV and penicillin at 11:20, 1:25pm started Pitocin and IV."
-
-"At 1:48 contractions were 5-6 min apart."
-```
-
-Claude parsed the times, categorized each event, added clinical context, and wrote it all to JSON — building a complete timeline from a single conversational message.
 
 ---
 
