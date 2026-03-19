@@ -22,22 +22,22 @@ This is a resume supplement, not a portfolio. The difference: a portfolio shows 
 
 A few things I believe that drive this repo:
 
-**AI is a thinking partner, not just a tool.** The most valuable thing I've found isn't using Claude to write emails or summarize documents — it's using it to build things in real time, while a situation is unfolding, with no pre-planning. The L&D tracker is a good example: it didn't exist until I needed it. I described the problem conversationally and we built it together over a few hours.
+**AI is a thinking partner, not just a tool.** The most valuable thing I've found isn't using Claude to write emails or summarize documents but it's using it to build things in real time, while a situation is unfolding, with no pre-planning. The L&D tracker is a good example: it didn't exist until I needed it. I described the problem conversationally and we built it together over a few hours.
 
-**Product thinking shows in how you respond to ambiguity.** A lot of what I do as a PM is make good decisions fast with incomplete information. This repo captures that in action — rough prompts, mid-stream pivots, and decisions made under pressure.
+**Product thinking shows in how you respond to ambiguity.** A lot of what I do as a PM is make good decisions fast with incomplete information. This repo captures that in action: rough prompts, mid-stream pivots, and decisions made under pressure.
 
-**Cybersecurity leadership is about more than technical controls.** It's about risk awareness, user behavior, and knowing what questions to ask. Some of that thinking shows up here too.
+**Cybersecurity strategy is about more than technical controls.** It's about risk awareness, user behavior, and knowing what questions to ask. Some of that thinking shows up here too.
 
 ---
 
 ## How the AI-built tools work
 
-Each tool follows the same pattern — no manual coding required:
+Each tool follows the same pattern. No manual coding required:
 
 1. A real situation comes up
-2. I describe what I need to Claude in plain English — no specs, no wireframes
+2. I describe what I need to Claude in plain English. No specs, no wireframes.
 3. Claude builds it, iterates, and updates files directly on my computer via filesystem access
-4. I narrate what I observe in real time — Claude classifies, logs, and flags
+4. I narrate what I observe in real time. Claude classifies, logs, and flags.
 
 The prompts that built each tool are included unedited. Typos and all.
 
@@ -52,8 +52,8 @@ Then open `http://localhost:8080/[filename].html` in Chrome. No installs, no dep
 
 ## Connect
 
-- LinkedIn: *[your LinkedIn URL]*
-- GitHub: *[your GitHub URL]*
+- LinkedIn: *[[Click here]](https://www.linkedin.com/in/jamesalaniz/)*
+- GitHub: *[[Click here](https://github.com/jma280/)]*
 
-If something here is useful or you want to talk PM, security, or AI — reach out.
+If something here is useful or you want to talk PM, security, or AI, reach out.
 # claude-use-cases
