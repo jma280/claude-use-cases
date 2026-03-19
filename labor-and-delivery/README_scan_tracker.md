@@ -1,6 +1,6 @@
 # Hospital Scan Tracker
 
-**A Claude-powered billing watchdog for hospital stays — built in real time during a Labor & Delivery admission.**
+**A Claude-powered billing watchdog for hospital stays. Built in real time during a Labor & Delivery admission.**
 
 ## What it does
 
@@ -80,23 +80,6 @@ hospital_scan_tracker.html ← reads JSON, displays in browser
 
 ---
 
-## Example prompts used to build and update this
-
-```
-"Can you help me track every time a nurse scans something?
-I am at the hospital and want to make sure we don't get overcharged."
-
-"She just scanned 4 times. Once on the wrist and three times on or near the IV bag."
-
-"She just said the penicillin was 5 this time but when they do it again
-maybe 2 more times it will be 2.5."
-
-"Just scanned bag twice, one for Pitocin and one for maybe saline."
-```
-
-Claude auto-classified each item, added billing context, and updated the JSON directly — no manual data entry required.
-
----
 
 ## L&D billing tips
 
