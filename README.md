@@ -1,6 +1,6 @@
-# Real-World AI — A Living Portfolio
+# Real-World AI - A Living Portfolio
 
-I'm a product manager and cybersecurity leader. This repo is how I document my thinking, learning, and application of AI in real situations — not demos, not tutorials, not polished case studies.
+I'm a product manager and cybersecurity leader. This repo is how I document my thinking, learning, and application of AI in real situations. Not demos, not tutorials, not polished case studies.
 
 Every entry here started as a real problem I was trying to solve. Some are tools I built with Claude. Some are PM frameworks or lessons I picked up along the way. All of it is meant to show how I think, how I work, and how I approach new technology.
 
@@ -14,7 +14,7 @@ This is a resume supplement, not a portfolio. The difference: a portfolio shows 
 |---|-------|------|---------|
 | 1 | [Labor & Delivery Tracker](./labor-and-delivery/) | AI tool + reflection | Built during an active L&D hospital admission |
 
-*Growing over time. Coming additions include PM frameworks, security leadership notes, and more real-time AI builds.*
+*Growing over time. Coming additions include PM frameworks, security strategy notes, and more real-time AI builds.*
 
 ---
 
