@@ -56,7 +56,7 @@ hospital_scan_tracker.html ← reads JSON, displays in browser
 {
   "entries": [
     {
-      "text": "penicillin 5mg",
+      "text": "Pitocin 5mg",
       "type": "medication",
       "note": "Auto-generated billing note",
       "date": "YYYY-MM-DD",
