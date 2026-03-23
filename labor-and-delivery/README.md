@@ -10,7 +10,7 @@ A family member was admitted for labor & delivery. As someone who spends a lot o
 
 Rather than take scattered notes or try to remember everything, I asked Claude to build a tracker while we were sitting in the room. No pre-planning. No spec. Just: "can you help me track every time a nurse scans something?"
 
-What followed was about 3 hours of iterative building entirely through conversation, while actively observing what was happening in the room.
+What followed was about an hour of iterative building entirely through conversation, while actively observing what was happening in the room.
 
 ---
 
