@@ -12,13 +12,13 @@ Built specifically for L&D but works for any hospital stay.
 
 ## Features
 
-- **Scan log** — log every item scanned by a nurse with auto-classification (medication vs. supply) and billing notes
-- **Dose tracker** — automatically tracks multi-dose medications (e.g. penicillin loading dose + maintenance doses) with a running total
-- **Labs & Orders tab** — separate tracker for lab tests ordered, with auto-description of what each test checks and a "mark completed" status
-- **L&D Watch List** — built-in checklist of common L&D billing line items and the most frequent billing errors (duplicate delivery charges, nursery fees, etc.)
-- **Date & time grouping** — entries grouped by day, pre-filled to current date/time
-- **Notes field** — log exactly what the nurse said for each scan
-- **Export** — export everything as CSV or plain text to compare against your itemized bill
+- **Scan log** - log every item scanned by a nurse with auto-classification (medication vs. supply) and billing notes
+- **Dose tracker** - automatically tracks multi-dose medications (e.g. penicillin loading dose + maintenance doses) with a running total
+- **Labs & Orders tab** - separate tracker for lab tests ordered, with auto-description of what each test checks and a "mark completed" status
+- **L&D Watch List** - built-in checklist of common L&D billing line items and the most frequent billing errors (duplicate delivery charges, nursery fees, etc.)
+- **Date & time grouping** - entries grouped by day, pre-filled to current date/time
+- **Notes field** - log exactly what the nurse said for each scan
+- **Export** - export everything as CSV or plain text to compare against your itemized bill
 
 ---
 
