@@ -13,10 +13,10 @@ Useful during labor for situational awareness, and afterward as a complete recor
 ## Features
 
 - **Live elapsed time counter** - counts from the exact moment labor started (not midnight), updates every minute
-- **Color-coded event categories** — Admission, Contractions, Medication, Procedure, Labs, Vitals, Delivery, Postpartum, Note
-- **Flagged items** — events relevant to billing (e.g. each Pitocin bag, medication doses, OB office visit) are flagged for bill review
-- **Day grouping** — events grouped by date for multi-day labors
-- **Export** — full plain-text export of the timeline including flagged items
+- **Color-coded event categories** - Admission, Contractions, Medication, Procedure, Labs, Vitals, Delivery, Postpartum, Note
+- **Flagged items** - events relevant to billing (e.g. each Pitocin bag, medication doses, OB office visit) are flagged for bill review
+- **Day grouping** - events grouped by date for multi-day labors
+- **Export** - full plain-text export of the timeline including flagged items
 
 ---
 
