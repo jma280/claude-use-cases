@@ -1,6 +1,6 @@
 # Real-World AI - A Living Portfolio
 
-I'm a product manager and cybersecurity leader. This repo is how I document my thinking, learning, and application of AI in real situations. Not demos, not tutorials, not polished case studies.
+I'm a product manager and cybersecurity professional. This repo is how I document my thinking, learning, and application of AI in real situations. Not demos, not tutorials, not polished case studies.
 
 Every entry here started as a real problem I was trying to solve. Some are tools I built with Claude. Some are PM frameworks or lessons I picked up along the way. All of it is meant to show how I think, how I work, and how I approach new technology.
 
