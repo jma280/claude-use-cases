@@ -34,7 +34,7 @@ labor_timeline.html      ← reads JSON, displays timeline in browser
 ## Setup
 
 1. Make sure both files are in the same folder
-2. Open Terminal and run:
+2. Open Terminal and run: (this might be wrong)
    ```
    cd path/to/this/folder && python3 -m http.server 8080
    ```
