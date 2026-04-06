@@ -49,8 +49,7 @@ Then open `http://localhost:8080/[filename].html` in Chrome. No installs, no dep
 
 ## Connect
 
-- LinkedIn: *[[Click here]](https://www.linkedin.com/in/jamesalaniz/)*
-- GitHub: *[[Click here](https://github.com/jma280/)]*
+- *[[Linkedin](https://www.linkedin.com/in/jamesalaniz/)*
 
 If something here is useful or you want to talk PM, security, or AI, reach out.
 
