@@ -28,7 +28,7 @@ A few things I believe that drive this repo:
 
 ---
 
-## How the AI-built tools work
+## How the AI-built tools work (i want to update this)
 
 Each tool follows the same pattern. No manual coding required:
 
