@@ -83,11 +83,10 @@ hospital_scan_tracker.html ← reads JSON, displays in browser
 
 ## L&D billing tips
 
-- **Request an itemized bill** at discharge — hospitals are required to provide one
-- **Baby gets a separate bill** — don't forget to request itemized for the newborn too
+- **Request an itemized bill** at discharge hospitals are required to provide one
+- **Baby gets a separate bill** don't forget to request itemized for the newborn too
 - **Most common errors**: duplicate delivery charge (billed for both vaginal + C-section), nursery fees when baby rooms in, excessive saline bag charges
-- **Pitocin**: each bag is a separate billable line item — log every new bag
-- **Penicillin**: each dose billed separately regardless of size
+- **Pitocin**: each bag is a separate billable line item, log every new bag
 
 ---
 
