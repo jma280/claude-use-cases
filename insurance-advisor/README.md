@@ -11,6 +11,7 @@ The goal was to build something a non-technical family member could use in under
 ## What Was Built
 
 **Google Form + Apps Script automation**
+
 A Google Form with two fields (situation description, email address) wired to a Google Apps Script trigger. On submission, the script calls the Anthropic API, passes the situation against policy details embedded in the system prompt, and emails a plain-English response back to the submitter within 30 seconds. No Claude account required for the end user.
 
 ## How It Works
