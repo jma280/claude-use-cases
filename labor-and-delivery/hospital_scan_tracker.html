@@ -98,7 +98,7 @@
 </div>
 <script>
 let entries=[],labs=[],ldWatchlist=[];
-const trackedDrugs=['morphine','fentanyl','insulin','heparin','dilaudid','hydromorphone','pitocin','oxytocin','epidural'];
+const trackedDrugs=['x, y, z'];
 const dotColors={'Room & facility':'dot-blue','Delivery charges':'dot-red','Medications to watch':'dot-amber','Common L&D billing errors':'dot-red','Baby charges (separate bill)':'dot-green'};
 function getDrugName(text){const t=text.toLowerCase();for(const d of trackedDrugs){if(t.includes(d))return d;}return null;}
 function extractDose(text){const m=text.match(/(\d+\.?\d*)\s*(mg|mcg|ml|units?|iu)/i);return m?{amount:parseFloat(m[1]),unit:m[2].toLowerCase()}:null;}
