@@ -12,7 +12,7 @@ Every entry here started as a real problem I was trying to solve. Some are tools
 |---|-------|------|---------|
 | 1 | [Labor & Delivery Tracker](./labor-and-delivery/) | AI tool + reflection | Built during an active L&D hospital admission |
 
-*GThis will continue to grow over time.*
+*This will continue to grow over time.*
 
 ---
 
