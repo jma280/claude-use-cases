@@ -31,12 +31,7 @@ A few things I believe that drive this repo:
 
 ## How the AI-built tools work (i want to update this)
 
-Each tool follows the same pattern. No manual coding required:
-
-1. A real situation comes up
-2. I describe what I need to Claude in plain English. No specs, no wireframes.
-3. Claude builds it, iterates, and updates files directly on my computer via filesystem access
-4. I narrate what I observe in real time. Claude classifies, logs, and flags.
+Each entry here started as a real problem, described in plain English. No specs, no wireframes, no pre-planning. The builds vary in shape — some are local tools, some are automations, some are frameworks. What's consistent is the process: describe the problem, iterate in real time, ship something that actually works.
 
 
 **To run any tool locally:**
