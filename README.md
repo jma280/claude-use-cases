@@ -29,17 +29,9 @@ A few things I believe that drive this repo:
 
 ---
 
-## How the AI-built tools work (i want to update this)
+## How the AI-built tools work 
 
 Each entry here started as a real problem, described in plain English. No specs, no wireframes, no pre-planning. The builds vary in shape — some are local tools, some are automations, some are frameworks. What's consistent is the process: describe the problem, iterate in real time, ship something that actually works.
-
-
-**To run any tool locally:**
-```bash
-cd [use-case-folder]
-python3 -m http.server 8080
-```
-Then open `http://localhost:8080/[filename].html` in Chrome. No installs, no dependencies.
 
 ---
 
