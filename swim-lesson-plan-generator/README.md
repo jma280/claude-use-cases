@@ -1,6 +1,6 @@
 # Swim Lesson Plan Generator
 
-A reusable AI prompt that turns a few details about a swimmer into an honest, age-appropriate, day-by-day swim plan a parent can run themselves. Built during my paternity leave while planning a month of swim lessons for my two-year-old at the YMCA.
+A reusable AI prompt that turns a few details about a swimmer into an honest, age-appropriate, day-by-day swim plan a parent can run themselves. Built while planning a month of swim lessons for my two-year-old at the YMCA.
 
 ## The Problem
 
