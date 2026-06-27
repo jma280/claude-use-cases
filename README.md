@@ -36,6 +36,6 @@ Each entry here started as a real problem, described in plain English. No specs,
 
 ## Connect
 
-- LinkedIn: *[https://www.linkedin.com/in/jamesalaniz/]*
+- LinkedIn: [James Alaniz](https://www.linkedin.com/in/jamesalaniz/)
 
 If something here is useful or you want to talk PM, security, or AI, reach out.
