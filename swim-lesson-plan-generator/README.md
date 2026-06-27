@@ -57,7 +57,7 @@ Calibration beats confidence. The failure mode of a generative tool is a fluent,
 1. Open `prompt/swim-plan-prompt.md`
 2. Copy the prompt in the code block
 3. Fill in the bracketed fields with your swimmer's details
-4. Paste it into Claude or another assistant
+4. Paste it into Claude or another AI tool
 5. Push back conversationally to refine ("make sessions 20 minutes," "she is terrified of going under, slow it down")
 
 No account setup or code required. Works with any capable chat assistant.
