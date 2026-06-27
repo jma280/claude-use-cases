@@ -12,7 +12,7 @@ Every entry here started as a real problem I was trying to solve. Some are tools
 |---|-------|------|---------|
 | 1 | [Labor & Delivery Tracker](./labor-and-delivery/) | AI tool + reflection | Built during an active L&D hospital admission |
 | 2 | [Insurance Advisor](./insurance-advisor/) | AI tool + automation | Household coverage checker built for non-technical family members — Google Form front end, Apps Script trigger, Anthropic API back end |
-| 3 | [Swim Lesson Plan Generator](./swim-lessons/) | Reusable prompt | Parameterized prompt that builds an honest, age-appropriate swim plan and calibrates the goal to the child before answering |
+| 3 | [Swim Lesson Plan Generator](./swim-lesson-plan-generator/) | Reusable prompt | Parameterized prompt that builds an honest, age-appropriate swim plan and calibrates the goal to the child before answering |
 
 *Growing over time. Coming additions include PM frameworks, security leadership notes, and more real-time AI builds.*
 
