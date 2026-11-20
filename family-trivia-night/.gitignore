@@ -1,0 +1,6 @@
+# Your Firebase project details stay out of Git.
+js/config.js
+.firebase/
+.firebaserc
+node_modules/
+.DS_Store
