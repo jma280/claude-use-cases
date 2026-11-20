@@ -1,32 +1,28 @@
 # Family Trivia Night: Party Edition
 
-A game-show style trivia night for the living room. The TV is the board, each team's phone is its controller, and Claude writes every question, picks the final, and judges the typed answers.
+A game-show style trivia night for the living room. The TV is the board, each team's phone is its controller, and Claude does the work.
 
 ![A question on the TV while two teams have locked in steal attempts on their phones](docs/steal.png)
 
 ## The Problem
 
-Holiday trivia with a mixed crowd usually goes one of two ways. Someone reads questions off a phone and half the room checks out, or you buy a boxed game whose questions are ten years stale and skewed to one generation.
+Holiday trivia with a mixed crowd usually goes one of two ways. Someone reads questions off a phone and half the room checks out, or you buy a boxed game whose questions are ten years stale.
 
 I wanted something that felt like a real game show: teams, a board on the TV, everyone holding a controller, and a reason to pay attention when it is not your turn. I also wanted fresh questions every time, in categories I pick, without writing any of them myself.
 
 ## What Was Built
 
-A browser game with three pieces: a host page for the TV, a controller page for phones, and Claude behind the scenes.
+A browser game in three pieces: a host page for the TV, a controller page for each team's phone, and Claude behind the scenes.
 
-- **Teams and turns.** One phone per team. The team that is up picks one of four category cards worth 100, 200, 300 or 400. The value is the difficulty.
-- **Steals.** While the active team is deciding, every other team can secretly lock in its own answer. If the active team misses, correct steals earn half the points. The moment the active team answers, steals close, so answering fast is a defense.
-- **A wager final.** Teams see only the category, bet points in secret, then type an answer. Claude judges the answers and forgives spelling. The reveal runs from last place to first.
-- **No quizmaster.** The phones drive the game, so the person who set it up gets to play.
-- **Sudden death** if teams are tied at the end.
-- **Rematch or new game.** After the winner is crowned, one button starts a rematch with the same teams and phones, and another starts fresh with a new code. A game holds up to 8 teams.
-- **No repeats.** The game remembers the questions and answers it has shown, across game nights, and tells Claude to stay away from them.
+- **Pick a card.** The team that is up chooses one of four categories worth 100 to 400. The value is the difficulty.
+- **Steal.** Every other team can secretly lock in an answer and take half the points if the active team misses.
+- **Wager the final.** Teams bet in secret and type an answer, and Claude judges it.
+
+The phones run the game, so nobody has to play quizmaster. The full rules are in [SPEC.md](SPEC.md).
 
 ![The active team choosing between four category cards](docs/pick.png)
 
 ![The final round reveal with wagers and an overrule button for each team](docs/final.png)
-
-The full rules and every design decision are in [SPEC.md](SPEC.md).
 
 ## Where Claude Does the Work
 
@@ -80,30 +76,24 @@ Phones need a web address and a relay. Firebase provides both on its free Spark 
 
 ## Security and Risk Notes
 
-- **The API key lives in one browser tab.** It is kept in the host tab's session storage, sent only to api.anthropic.com, and gone when the tab closes. Phones never receive it and it is never written to Firebase. Use a dedicated key with a spend limit.
-- **Question history stays in the host browser.** Questions and answers that have been shown are remembered in the host laptop's browser so later game nights do not repeat them. It is trivia text only, with no team names or scores, and the setup screen has a button to clear it.
-- **Answers stay on the host.** Phones receive only what they are meant to display.
-- **Database rules do the access control.** Every device signs in anonymously. A phone can write only its own team's entries, and only the host can read teams' secret answers and wagers.
-- **Typed answers are untrusted input.** They are length-limited, rendered as text and never as HTML, and passed to the judging prompt as data.
-- **Model output is untrusted too.** Questions are rendered as text, and the game shuffles answer order itself.
-- **Security headers** in `firebase.json` limit the deployed site to connecting to Anthropic and Firebase.
-- **Firebase config is not a secret**, but `js/config.js` is ignored by Git so project details stay out of the repo. The rules are what protect the data.
-- **The site is public while it is deployed.** Anyone with the address could create rooms and use free-tier quota. They cannot reach the API key. The `go-private.sh` script closes that gap between game nights.
-- **Known gap:** a room abandoned mid-game stays in the database until it is deleted in the Firebase console.
+- **API key.** It lives in one browser tab on the host laptop, goes only to Anthropic, and is gone when the tab closes. Phones never see it.
+- **Access control.** Firebase rules let a phone write only its own team's moves.
+- **Untrusted input.** Typed answers and model output are rendered as plain text, and the judge is told to grade an answer, not obey it.
+- **Exposure.** The site is public while deployed. `go-private.sh` locks the database and takes the site offline between game nights.
 
 ## PM Takeaways
 
-**Decide the rules before writing any code.** The spec was settled one decision at a time: turn-based or simultaneous, what age should do, how steals pay, who runs the game. Each answer narrowed the next question. By the time the build started there was nothing left to guess, and the first version matched the spec.
+**Requirements before build.** I wrote the spec before any code, one decision at a time: turn-based or simultaneous, how steals pay, who runs the game. Each answer narrowed the next question. The first build matched the spec because nothing was left open to interpretation.
 
-**Cut what you will not miss.** Custom avatar art gave way to emoji. Collecting every player's name at signup gave way to a team name. Neither cut cost anything at the table, and both removed work and friction.
+**Cut scope, not quality.** Custom avatar art became emoji, and player sign-up became just a team name. Players lose nothing they would notice, and both cuts made the game faster to build and faster to join.
 
-**Build the test harness before the infrastructure.** A simulator that runs the TV and three phones on one screen came before any cloud setup. The whole game was playable, and changeable, before a backend existed. When the backend arrived it only had to relay messages.
+**Prototype before committing to infrastructure.** A simulator that runs the TV and three phones on one screen came before any backend. It let me judge the experience and change the rules while changes were still cheap. The backend came last and only had to relay messages.
 
-**A rule is not finished until you have seen it run.** Steals first had a grace window after the active team answered. Seeing the first build made it clear that closing steals the instant the active team answers was better, because it gives that team a defense.
+**Iterate on real usage.** The first build gave other teams a few extra seconds to steal after the active team answered. Playing it showed a better rule: steals close the moment the active team answers, which gives that team a defense. That change came from using the product, not from reviewing the spec.
 
-**Models repeat themselves, so put the randomness in the code.** In early testing, two games in a row ended on the same final answer. Asked the same open question twice, a model tends to reach for the same favorite. The fix was not a better prompt. The game now draws the category and era itself, keeps a list of what has been asked, and bans answers it has already used.
+**User testing finds what reviews miss.** Two test games in a row ended on the same final answer. Nothing in the spec or the code review would have caught it. The root cause was the model returning to a favorite, and the fix was in the product logic, not the prompt: the game now draws categories itself and tracks what it has already asked.
 
-**Put the secret where the trust is.** Players' phones are the least trusted devices in the room, so they hold nothing: no key, no answers. That one decision shaped the whole architecture.
+**Security is a requirement, not a feature.** The trust boundary was set during requirements: players' phones are the least trusted devices in the room, so they hold no key and no answers. Deciding that up front shaped the architecture and cost nothing extra to build.
 
 ## What's in the Folder
 
